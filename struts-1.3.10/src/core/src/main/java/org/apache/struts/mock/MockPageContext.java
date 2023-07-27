@@ -20,16 +20,20 @@
  */
 package org.apache.struts.mock;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.BodyContent;
+import jakarta.el.ELContext;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.el.ExpressionEvaluator;
+import jakarta.servlet.jsp.el.VariableResolver;
+import jakarta.servlet.jsp.tagext.BodyContent;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -602,4 +606,28 @@ public class MockPageContext extends PageContext {
             throw new IllegalArgumentException("Invalid scope " + scope);
         }
     }
+
+	@Override
+	public void include(String relativeUrlPath, boolean flush) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ExpressionEvaluator getExpressionEvaluator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public VariableResolver getVariableResolver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ELContext getELContext() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

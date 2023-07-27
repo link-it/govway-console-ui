@@ -33,8 +33,8 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.ModuleConfigFactory;
 import org.apache.struts.util.MessageResources;
 
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.UnavailableException;
 
 import java.util.List;
 

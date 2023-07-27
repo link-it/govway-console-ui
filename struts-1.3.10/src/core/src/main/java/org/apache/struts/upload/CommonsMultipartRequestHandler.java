@@ -20,10 +20,15 @@
  */
 package org.apache.struts.upload;
 
-import org.apache.commons.fileupload.DiskFileUpload;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload2.core.DiskFileItem;
+import org.apache.commons.fileupload2.core.FileItem;
+import org.apache.commons.fileupload2.core.FileUploadByteCountLimitException;
+import org.apache.commons.fileupload2.core.FileUploadException;
+import org.apache.commons.fileupload2.jakarta.JakartaServletDiskFileUpload;
+//import org.apache.commons.fileupload.DiskFileUpload;
+//import org.apache.commons.fileupload.disk.DiskFileItem;
+//import org.apache.commons.fileupload.FileItem;
+//import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
@@ -31,16 +36,16 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ModuleConfig;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -159,20 +164,23 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
             (ModuleConfig) request.getAttribute(Globals.MODULE_KEY);
 
         // Create and configure a DIskFileUpload instance.
-        DiskFileUpload upload = new DiskFileUpload();
+        JakartaServletDiskFileUpload upload = new JakartaServletDiskFileUpload();
 
         // The following line is to support an "EncodingFilter"
         // see http://issues.apache.org/bugzilla/show_bug.cgi?id=23255
-        upload.setHeaderEncoding(request.getCharacterEncoding());
+        if(request.getCharacterEncoding()!=null) {
+        	upload.setHeaderCharset( Charset.forName(request.getCharacterEncoding()));
+        }
 
         // Set the maximum size before a FileUploadException will be thrown.
         upload.setSizeMax(getSizeMax(ac));
 
-        // Set the maximum size that will be stored in memory.
-        upload.setSizeThreshold((int) getSizeThreshold(ac));
-
-        // Set the the location for saving data on disk.
-        upload.setRepositoryPath(getRepositoryPath(ac));
+//        // Set the maximum size that will be stored in memory.
+        upload.setFileSizeMax((int) getSizeMax(ac));
+//        upload..setSizeThreshold((int) getSizeThreshold(ac));
+//
+//        // Set the the location for saving data on disk.
+//        upload.setRepositoryPath(getRepositoryPath(ac));
 
         // Create the hash tables to be populated.
         elementsText = new Hashtable();
@@ -184,7 +192,7 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
 
         try {
             items = upload.parseRequest(request);
-        } catch (DiskFileUpload.SizeLimitExceededException e) {
+        } catch (FileUploadByteCountLimitException e) {
             // Special handling for uploads that are too big.
             request.setAttribute(MultipartRequestHandler.ATTRIBUTE_MAX_LENGTH_EXCEEDED,
                 Boolean.TRUE);
@@ -199,7 +207,7 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
         Iterator iter = items.iterator();
 
         while (iter.hasNext()) {
-            FileItem item = (FileItem) iter.next();
+            FileItem<?> item = (FileItem) iter.next();
 
             if (item.isFormField()) {
                 addTextParameter(request, item);
@@ -342,7 +350,7 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
      * explicitly defined either using the <code>tempDir</code> servlet init
      * param, or the <code>tempDir</code> attribute of the &lt;controller&gt;
      * element in the Struts config file.</li> <li>The container-specified
-     * temp dir, obtained from the <code>javax.servlet.context.tempdir</code>
+     * temp dir, obtained from the <code>jakarta.servlet.context.tempdir</code>
      * servlet context attribute.</li> <li>The temp dir specified by the
      * <code>java.io.tmpdir</code> system property.</li> (/ol> </p>
      *
@@ -359,7 +367,7 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
             if (servlet != null) {
                 ServletContext context = servlet.getServletContext();
                 File tempDirFile =
-                    (File) context.getAttribute("javax.servlet.context.tempdir");
+                    (File) context.getAttribute("jakarta.servlet.context.tempdir");
 
                 tempDir = tempDirFile.getAbsolutePath();
             }
@@ -393,7 +401,7 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
         String encoding = null;
 
         if (item instanceof DiskFileItem) {
-            encoding = ((DiskFileItem)item).getCharSet();
+            encoding = ((DiskFileItem)item).getCharset().name();
             if (log.isDebugEnabled()) {
                 log.debug("DiskFileItem.getCharSet=[" + encoding + "]");
             }
@@ -408,7 +416,7 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
 
         if (encoding != null) {
             try {
-                value = item.getString(encoding);
+                value = item.getString(Charset.forName(encoding));
                 haveValue = true;
             } catch (Exception e) {
                 // Handled below, since haveValue is false.
@@ -417,8 +425,8 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
 
         if (!haveValue) {
             try {
-                value = item.getString("ISO-8859-1");
-            } catch (java.io.UnsupportedEncodingException uee) {
+                value = item.getString(Charset.forName("ISO-8859-1"));
+            } catch (IOException uee) {
                 value = item.getString();
             }
 
@@ -595,7 +603,11 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
          * somewhere </p>
          */
         public void destroy() {
-            fileItem.delete();
+        	try {
+        		fileItem.delete();
+        	}catch(Exception e) {
+        		// ignore
+        	}
         }
 
         /**

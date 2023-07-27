@@ -20,8 +20,6 @@
  */
 package org.apache.struts.chain.commands.servlet;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.chain.web.servlet.ServletWebContext;
 import org.apache.struts.chain.commands.UnauthorizedActionException;
 import org.apache.struts.chain.contexts.ServletActionContext;
@@ -32,6 +30,8 @@ import org.apache.struts.mock.MockHttpServletResponse;
 import org.apache.struts.mock.MockPrincipal;
 import org.apache.struts.mock.MockServletConfig;
 import org.apache.struts.mock.MockServletContext;
+
+import junit.framework.TestCase;
 
 /* JUnitTest case for class: org.apache.struts.chain.commands.servlet.AuthorizeAction */
 public class TestAuthorizeAction extends TestCase {

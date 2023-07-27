@@ -20,13 +20,13 @@
  */
 package org.apache.struts.mock;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.Collection;
 import java.util.Locale;
 
 /**
@@ -172,4 +172,46 @@ public class MockHttpServletResponse implements HttpServletResponse {
     public void setLocale(Locale locale) {
         throw new UnsupportedOperationException();
     }
+
+	@Override
+	public String getContentType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCharacterEncoding(String charset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setContentLengthLong(long len) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getHeader(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<String> getHeaders(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<String> getHeaderNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
