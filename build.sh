@@ -22,6 +22,8 @@ then
 	echo "Richiesta java version 11, trovata: ${JAVA_VERSION}"
 fi
 
+find . -name target | xargs rm -rf
+export MAVEN_OPTS="-Xmx2048m -XX:MaxMetaspaceSize=2048m"
 mvn install
 
 VERSION=$(ls package/target/govway-console-ui-*.jar  | cut -d '-' -f 4 | cut -d '.' -f 1)
