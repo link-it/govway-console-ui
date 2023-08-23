@@ -209,8 +209,7 @@
                         <tasks>
                            <copy todir="${project.build.directory}/site/dtds"
                                  failonerror="false">
-                              <fileset dir="${basedir}/core/src/main/resources/org/apache/struts/resources"/>
-                              <fileset dir="${basedir}/tiles/src/main/resources/org/apache/struts/resources"/>
+                              <fileset dir="${basedir}/core/src/main/resources/org/govway/struts/resources"/>
                            </copy>
                         </tasks>
                      </configuration>
