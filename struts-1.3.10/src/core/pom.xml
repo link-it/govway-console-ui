@@ -142,12 +142,12 @@
 	<dependency>
 	    <groupId>org.apache.commons</groupId>
 	    <artifactId>commons-fileupload2-core</artifactId>
-	    <version>${commons-fileupload.version}</version>
+	    <version>${commons-fileupload-core.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.apache.commons</groupId>
 	    <artifactId>commons-fileupload2-jakarta</artifactId>
-	    <version>${commons-fileupload.version}</version>
+	    <version>${commons-fileupload-jakarta.version}</version>
 	</dependency>
         <dependency>
             <groupId>commons-logging</groupId>
