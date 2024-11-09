@@ -29,6 +29,11 @@
     $Id: chain-config.xml 481833 2006-12-03 17:32:52Z niallp $
 -->
 
+<!--
+   Modificato da Link.it (https://link.it) per applicazione patch di sicurezza e migrazione a jakarta EE
+  
+   Copyright (c) 2022-2024 Link.it srl (https://link.it). 
+-->
 
 <catalog name="struts">
 
