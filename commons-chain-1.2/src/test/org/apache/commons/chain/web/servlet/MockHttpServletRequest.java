@@ -28,6 +28,7 @@ import org.apache.commons.chain.web.MockPrincipal;
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConnection;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
@@ -584,6 +585,27 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
 	@Override
 	public <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getRequestId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getProtocolRequestId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ServletConnection getServletConnection() {
 		// TODO Auto-generated method stub
 		return null;
 	}

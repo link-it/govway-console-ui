@@ -26,7 +26,6 @@ import org.apache.commons.chain.web.MockEnumeration;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpSessionContext;
 import java.util.Enumeration;
 import java.util.HashMap;
 
@@ -96,11 +95,6 @@ public class MockHttpSession implements HttpSession {
 
     public ServletContext getServletContext() {
         return (this.servletContext);
-    }
-
-
-    public HttpSessionContext getSessionContext() {
-        throw new UnsupportedOperationException();
     }
 
 
