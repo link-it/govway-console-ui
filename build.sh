@@ -1,26 +1,27 @@
-RELEASE=$1
-if [ -z "${RELEASE}" ]
-then
-	echo "Tipo di build non fornito"
-	echo "Error; usage: ./build.sh snapshot|release [upload:true/false]"
-	exit 2
-fi
-if [ ! "snapshot" == "${RELEASE}" -a ! "release" == "${RELEASE}" ]
-then
-	echo "Tipo di build '${RELEASE}' sconosciuto"
-	echo "Error; usage: ./build.sh snapshot|release [upload:true/false]"
-	exit 3
-fi
+#RELEASE=$1
+#if [ -z "${RELEASE}" ]
+#then
+#	echo "Tipo di build non fornito"
+#	echo "Error; usage: ./build.sh snapshot|release [upload:true/false]"
+#	exit 2
+#fi
+#if [ ! "snapshot" == "${RELEASE}" -a ! "release" == "${RELEASE}" ]
+#then
+#	echo "Tipo di build '${RELEASE}' sconosciuto"
+#	echo "Error; usage: ./build.sh snapshot|release [upload:true/false]"
+#	exit 3
+#fi
 
-UPLOAD=$2
+UPLOAD=$1
 if [ -z "${UPLOAD}" ]
 then
-	UPLOAD=false
+	echo "Error; usage: ./build.sh [predisposizione progetto maven central:true/false]"
+	exit 4
 fi
 if [ ! "${UPLOAD}" == "true" -a ! "${UPLOAD}" == "false" ]
 then
 	echo "Indicazione upload non valida '${UPLOAD}'"
-	echo "Error; usage: ./build.sh snapshot|release [upload:true/false]"
+	echo "Error; usage: ./build.sh [upload:true/false]"
 	exit 4
 fi
 
@@ -47,10 +48,15 @@ fi
 
 if [ "${UPLOAD}" == "true" ]
 then
-	echo "Upload to maven repository ..."
+	echo "Prepare maven central repository project ..."
 
-	GROUP_ID="org.govway-console-ui"
-	bash package/script/deploy.sh package/target/govway-console-ui-${VERSION}.jar govway-console-ui ${GROUP_ID} ${VERSION} ${RELEASE}
+	bash package/script/build.sh ${VERSION}
 
-	echo "Upload to maven repository finished"
+	echo "Prepare maven central repository project finished"
+	
+	echo ""
+	echo "!! Attenzione !!"
+	echo "!!!! Effettuare un rilascio solamente di una tag version !!!!!"
+	echo ""
+	echo "Per completare il deploy su maven central entrare nella directory govway-console-ui ed utilizzare il comando 'mvn clean deploy'"
 fi
