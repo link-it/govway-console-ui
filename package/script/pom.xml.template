@@ -19,7 +19,7 @@
 		<original.chain.version>1.2</original.chain.version>
 	</properties>
 
-	<name>govway-console-ui-${govway-console-ui.version}.jar</name>
+	<name>govway-console-ui-VERSIONE-LIBRERIA.jar</name>
 	<description>Riscrittura componenti interfaccia utente terza parte utilizzate da GovWayConsole per risoluzione problematiche di sicurezza e migrazione verso Jakarta EE</description>
 	<url>https://gov4j.org/maven/govway/govway-console-ui/VERSIONE-LIBRERIA</url>
 
