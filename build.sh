@@ -59,4 +59,7 @@ then
 	echo "!!!! Effettuare un rilascio solamente di una tag version !!!!!"
 	echo ""
 	echo "Per completare il deploy su maven central entrare nella directory govway-console-ui ed utilizzare il comando 'mvn clean deploy'"
+else
+	JAR_NAME=$(ls package/target/govway-console-ui-*.jar)
+	echo "Archivio jar disponibile in ${JAR_NAME}"
 fi

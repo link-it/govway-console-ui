@@ -215,7 +215,11 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
             FileItem<?> item = (FileItem) iter.next();
 
             if (item.isFormField()) {
-                addTextParameter(request, item);
+            	try {
+            		addTextParameter(request, item);
+            	}catch(Exception e) {
+            		throw new ServletException(e.getMessage(),e);
+            	}
             } else {
                 addFileParameter(item);
             }
@@ -398,8 +402,9 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
      *
      * @param request The request in which the parameter was specified.
      * @param item    The file item for the parameter to add.
+     * @throws IOException 
      */
-    protected void addTextParameter(HttpServletRequest request, FileItem item) {
+    protected void addTextParameter(HttpServletRequest request, FileItem item) throws IOException {
         String name = item.getFieldName();
         String value = null;
         boolean haveValue = false;

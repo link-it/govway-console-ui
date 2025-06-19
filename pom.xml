@@ -10,14 +10,14 @@
         <maven.compile.source>11</maven.compile.source>
         <maven.compile.target>11</maven.compile.target>
       
-        <govway-console-ui.version>20250610</govway-console-ui.version>
+        <govway-console-ui.version>20250619</govway-console-ui.version>
  
         <!-- Versioni librerie poi presenti in govway -->
 	<commons-beanutils.version>1.11.0</commons-beanutils.version>
 	<commons-digester.version>2.1</commons-digester.version>
-	<commons-fileupload-core.version>2.0.0-M2</commons-fileupload-core.version>
+	<commons-fileupload-core.version>2.0.0-M4</commons-fileupload-core.version>
 	<commons-fileupload-jakarta.version>2.0.0-M1</commons-fileupload-jakarta.version>
-	<commons-logging.version>1.2</commons-logging.version>
+	<commons-logging.version>1.3.5</commons-logging.version>
 	<commons-validator.version>1.9.0</commons-validator.version>
 	<jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
 	<jakarta.servlet-jsp-api.version>3.1.1</jakarta.servlet-jsp-api.version>
