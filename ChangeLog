@@ -1,3 +1,15 @@
+2026-04-24  Andrea Poli <apoli@link.it>
+
+        * Rilasciata versione 20260424
+
+2026-04-24  Andrea Poli <apoli@link.it>
+
+	* Aggiornate librerie: 
+	- commons-fileupload-core dalla v2.0.0-M4 alla v2.0.0-M5
+	- commons-logging dalla v1.3.5 alla v1.3.6
+	- commons-validator dalla v1.9.0 alla v1.10.1
+	- jakarta.servlet-api dalla v6.0.0 alla v6.1.0 
+
 2025-06-10  Andrea Poli <apoli@link.it>
 
 	* Rilasciata versione 20250610

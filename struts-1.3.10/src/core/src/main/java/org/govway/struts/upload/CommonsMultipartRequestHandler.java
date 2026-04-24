@@ -178,10 +178,10 @@ public class CommonsMultipartRequestHandler implements MultipartRequestHandler {
         }
 
         // Set the maximum size before a FileUploadException will be thrown.
-        upload.setSizeMax(getSizeMax(ac));
+        upload.setMaxSize(getSizeMax(ac));
 
 //        // Set the maximum size that will be stored in memory.
-        upload.setFileSizeMax((int) getSizeMax(ac));
+        upload.setMaxFileSize(getSizeMax(ac));
 //        upload..setSizeThreshold((int) getSizeThreshold(ac));
 //
 //        // Set the the location for saving data on disk.
